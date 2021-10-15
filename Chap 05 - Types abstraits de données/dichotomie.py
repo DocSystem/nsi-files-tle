@@ -42,7 +42,7 @@ def dicho_rec(T,x,l,r):
     m = (l+r)//2
     if T[m] < x:
         return dicho_rec(T,x,m+1,r)
-    if T[m] > x:
+    if T[m] >= x:
         return dicho_rec(T,x,l,m)
 
 def dicho_ite(T,x,l,r):
@@ -59,7 +59,7 @@ def dicho_ite(T,x,l,r):
 l=0
 r=60000
 x=4
-T=[i for i in range(1000000000)]
+T=[i for i in range(100000)]
 
 debut1 = timer()
 print(dicho_rec(T,x,l,r))
