@@ -24,3 +24,11 @@ def factorielle_pile(n):
     n=1
     while len(t) > 0: n*=pileDepiler(t)
     return n
+
+def puissance_rec2(x, n):
+    if n==0:
+        return 1
+    if n%2==0:
+        return puissance_rec2(x, n/2)**2
+    else:
+        return x*puissance_rec2(x, (n-1)/2)**2
