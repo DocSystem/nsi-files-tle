@@ -61,16 +61,4 @@ r=60000
 x=4
 T=[i for i in range(100000)]
 
-debut1 = timer()
-print(dicho_rec(T,x,l,r))
-fin1 = timer()
-temps1 = fin1 - debut1
-print(temps1)
-debut2 = timer()
 print(dicho_ite(T,x,l,r))
-fin2 = timer()
-temps2 = fin2 - debut2
-print(temps2)
-print(" ")
-if temps2 > temps1:
-    print("La version itérative ")
