@@ -1,39 +1,37 @@
-def binomial_rec(a, b): # Question 2
-    if b == 0 or b == a:
+# Question 2
+def binomial_rec(n, m):
+    if m == 0 or m == n:
         return 1
     else:
-        return binomial_rec(a - 1, b) + binomial_rec(a - 1, b - 1)
+        return binomial_rec(n - 1, m) + binomial_rec(n - 1, m - 1)
 
-# print(binomial_rec(4, 2))
+print(binomial_rec(4, 2))
 
-"""
-Question 3 :
-
-"""
-
-def binomial_dyn(a, b): # Question 4
-    if b == 0 or b == a:
+# Question 4
+def binomial_dyn(n, m):
+    if m == 0 or m == n:
         return 1
     else:
-        if b < a:
-            return binomial_dyn(a - 1, b) + binomial_dyn(a - 1, b - 1)
+        if m < n:
+            return binomial_dyn(n - 1, m) + binomial_dyn(n - 1, m - 1)
         else:
-            return binomial_dyn(a - 1, b)
+            return binomial_dyn(n - 1, m)
 
-# print(binomial_dyn(4, 2))
+print(binomial_dyn(4, 2))
 
-def binomial_memoise(a, b, K): # Question 5
-    if b == 0 or b == a:
+# Question 5
+def binomial_memoise(n, m, K):
+    if m == 0 or m == n:
         return 1
     else:
-        if K[a][b] == -1:
-            K[a][b] = binomial_memoise(a - 1, b, K) + binomial_memoise(a - 1, b - 1, K)
-        return K[a][b]
+        if K[n][m] == -1:
+            K[n][m] = binomial_memoise(n - 1, m, K) + binomial_memoise(n - 1, m - 1, K)
+        return K[n][m]
 
-def binomial(a, b):
-    K = [[-1] * (a + 1) for i in range(a + 1)]
+def binomial(n, m):
+    K = [[-1] * (n + 1) for i in range(n + 1)]
     K[0][0] = 1
     K[1][0], K[1][1] = 1, 1
-    return binomial_memoise(a, b, K)
+    return binomial_memoise(n, m, K)
 
 print(binomial(4, 2))
