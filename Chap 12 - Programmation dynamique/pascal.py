@@ -1,4 +1,4 @@
-def binomial_rec(a, b):
+def binomial_rec(a, b): # Question 2
     if b == 0 or b == a:
         return 1
     else:
@@ -6,7 +6,12 @@ def binomial_rec(a, b):
 
 # print(binomial_rec(4, 2))
 
-def binomial_dyn(a, b):
+"""
+Question 3 :
+
+"""
+
+def binomial_dyn(a, b): # Question 4
     if b == 0 or b == a:
         return 1
     else:
@@ -17,7 +22,7 @@ def binomial_dyn(a, b):
 
 # print(binomial_dyn(4, 2))
 
-def binomial_memoise(a, b, K):
+def binomial_memoise(a, b, K): # Question 5
     if b == 0 or b == a:
         return 1
     else:
