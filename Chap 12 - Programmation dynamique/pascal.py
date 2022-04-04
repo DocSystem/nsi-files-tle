@@ -9,13 +9,16 @@ print(binomial_rec(4, 2))
 
 # Question 4
 def binomial_dyn(n, m):
-    if m == 0 or m == n:
-        return 1
-    else:
-        if m < n:
-            return binomial_dyn(n - 1, m) + binomial_dyn(n - 1, m - 1)
-        else:
-            return binomial_dyn(n - 1, m)
+    K = [[-1] * (n + 1) for i in range(n + 1)]
+    K[0][0] = 1
+    K[1][0], K[1][1] = 1, 1
+    for i in range(2, n + 1):
+        for j in range(i + 1):
+            if j == 0 or j == i:
+                K[i][j] = 1
+            else:
+                K[i][j] = K[i - 1][j - 1] + K[i - 1][j]
+    return K[n][m]
 
 print(binomial_dyn(4, 2))
 
