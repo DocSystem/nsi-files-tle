@@ -88,8 +88,7 @@ for i in g:
             G.add_edge(i.nom, j.nom, color='red')
             print("Ajout du chemin entre " + i.nom + " et " + j.nom)
         else:
-            G.add_edge(i.nom, j.nom)
-# nx.draw(G, with_labels=True, font_weight='bold', node_size=800, node_color='lightgray')
-# draw graph using nx with edges colored
-nx.draw(G, with_labels=True, font_weight='bold', node_size=800, node_color='lightgray')
+            G.add_edge(i.nom, j.nom, color='black')
+colors = [G[u][v]['color'] for u,v in G.edges()]
+nx.draw(G, with_labels=True, font_weight='bold', node_size=800, node_color='lightgray', edge_color=colors)
 plt.show()
