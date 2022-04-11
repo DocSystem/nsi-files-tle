@@ -8,6 +8,8 @@ class Point:
         self.couleur = "blanc"
         self.distance = inf
         self.predecesseur = predecesseur
+        self.date = inf
+        self.fin = inf
 
 def enfiler(F, x):
     F.append(x)
@@ -42,6 +44,29 @@ def PL(g, s):
                 enfiler(F, v)
         u.couleur = "noir"
 
+def PP(g):
+    for i in g:
+        i.couleur = "blanc"
+        i.predecesseur = None
+    global date
+    date = 0
+    for i in g:
+        if i.couleur == "blanc":
+            PP_visiter(g, i)
+
+def PP_visiter(graphe, point):
+    global date
+    point.couleur = "gris"
+    date += 1
+    point.date = date
+    for voisin in graphe[point]:
+        if voisin.couleur == "blanc":
+            voisin.predecesseur = point
+            PP_visiter(graphe, voisin)
+    date += 1
+    point.couleur = "noir"
+    point.fin = date
+
 # a = Point("a")
 # b = Point("b")
 # c = Point("c")
@@ -50,19 +75,43 @@ def PL(g, s):
 # f = Point("f")
 # g = {a: [b, d], b: [a, c, e], c: [b], d: [a], e: [b, f], f: [e]}
 
-v = Point("v")
-r = Point("r")
-s = Point("s")
-w = Point("w")
-t = Point("t")
-u = Point("u")
-x = Point("x")
-y = Point("y")
-g = {v: [r], r: [s, v], s: [r, w], w: [s, t, x], t: [w, u], u: [t, x, y], x: [w, u, y], y: [u, x]}
+# v = Point("v")
+# r = Point("r")
+# s = Point("s")
+# w = Point("w")
+# t = Point("t")
+# u = Point("u")
+# x = Point("x")
+# y = Point("y")
+# g = {v: [r], r: [s, v], s: [r, w], w: [s, t, x], t: [w, u], u: [t, x, y], x: [w, u, y], y: [u, x]}
 
-PL(g, s)
+# Points de a à h
+# pA = Point("a")
+# pB = Point("b")
+# pC = Point("c")
+# pD = Point("d")
+# pE = Point("e")
+# pF = Point("f")
+# pG = Point("g")
+# pH = Point("h")
+# g = {pA: [pB, pE], pB: [pC, pD], pC: [pG], pD: [pC], pE: [pF], pF: [pB], pG: [], pH: [pD]}
+
+a = Point("a")
+b = Point("b")
+c = Point("c")
+d = Point("d")
+e = Point("e")
+f = Point("f")
+pG = Point("g")
+g = {a: [b, d], b: [c, e], c: [], d: [], e: [], f: [a], pG: [b, d]}
+
+# PL(g, pA)
+# for p in g:
+    # print(p.nom, p.distance)
+
+PP(g)
 for p in g:
-    print(p.nom, p.distance)
+    print(p.nom, p.date, p.fin)
 
 # draw graph using nx
 # G = nx.Graph()
@@ -79,16 +128,16 @@ def trouver_chemin(graphe, point_a, point_b):
     chemin.reverse()
     return chemin
 
-chemin = trouver_chemin(g, v, y)
+# chemin = trouver_chemin(g, pA, pG)
 
-G = nx.Graph()
-for i in g:
-    for j in g[i]:
-        if i in chemin and j in chemin:
-            G.add_edge(i.nom, j.nom, color='red')
-            print("Ajout du chemin entre " + i.nom + " et " + j.nom)
-        else:
-            G.add_edge(i.nom, j.nom, color='black')
-colors = [G[u][v]['color'] for u,v in G.edges()]
-nx.draw(G, with_labels=True, font_weight='bold', node_size=800, node_color='lightgray', edge_color=colors)
-plt.show()
+# G = nx.Graph()
+# for i in g:
+#     for j in g[i]:
+#         if i in chemin and j in chemin:
+#             G.add_edge(i.nom, j.nom, color='red')
+#             print("Ajout du chemin entre " + i.nom + " et " + j.nom)
+#         else:
+#             G.add_edge(i.nom, j.nom, color='black')
+# colors = [G[u][v]['color'] for u,v in G.edges()]
+# nx.draw(G, with_labels=True, font_weight='bold', node_size=800, node_color='lightgray', edge_color=colors)
+# plt.show()
